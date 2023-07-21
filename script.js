@@ -40,6 +40,7 @@ function calculateExchange() {
     if (exchangeRate) {
       const quantityTo = quantityFrom * exchangeRate;
       quantityToInput.value = quantityTo.toFixed(2); // Affiche deux décimales
+      console.log(quantityToInput.value);
     } else {
       quantityToInput.value = 'Taux de conversion introuvable';
     }
@@ -47,6 +48,7 @@ function calculateExchange() {
     quantityToInput.value = '';
   }
 }
+
 
 // Gérer l'événement de clic sur le bouton "Échanger"
 swapButton.addEventListener('click', calculateExchange);
