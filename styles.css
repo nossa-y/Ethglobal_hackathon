@@ -1,0 +1,52 @@
+/* Style spécifique pour la section du swap de cryptomonnaie */
+section {
+  background-color: #f2f2f2;
+  text-align: center;
+  padding: 30px 0;
+}
+
+h2 {
+  color: #333;
+}
+
+.crypto-swap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+select {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.swap-icon {
+  font-size: 24px;
+  margin: 0 20px;
+}
+
+swap-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+input[type="number"] {
+  padding: 10px;
+  font-size: 16px;
+  width: 120px;
+  text-align: center;
+  margin-right: 10px;
+}
+
+input[disabled] {
+  background-color: #f2f2f2;
+}
