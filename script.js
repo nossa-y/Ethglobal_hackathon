@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', function (){
+
 // Récupérer les éléments du DOM
 const quantityFromInput = document.getElementById('quantity-from');
 const cryptoFromSelect = document.getElementById('crypto-from');
@@ -60,3 +62,4 @@ cryptoToSelect.addEventListener('change', calculateExchange);
 quantityFromInput.addEventListener('input', calculateExchange);
 // Appeler la fonction calculateExchange pour initialiser la valeur de quantiteto
 calculateExchange();
+});
