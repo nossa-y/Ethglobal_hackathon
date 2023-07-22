@@ -4,9 +4,35 @@ from pymongo.mongo_client import MongoClient
 import csv
 import pymongo
 
+client = MongoClient("mongodb://localhost:27017")
 #client = pymongo.MongoClient("mongodb://localhost:27017/")
-database = client.
-collection = database.
+database = client["blockchain"]
+collection = database["transaction"]
+
+#exemple(chat):
+# Inserer un document
+data = {"nom": "John", "âge": 30, "pays": "France"}
+inserted_doc = collection.insert_one(data)
+print("ID du document inséré", inserted_doc.inserted_id)
+
+"""# Trouver un document dans la collection
+query = {"nom": "John"}
+result = collection.find_one(query)
+print(result)
+
+# Mettre à jour un document dans la collection
+query = {"nom": "John"}
+new_data = {"$set": {"âge": 31}}
+collection.update_one(query, new_data)
+
+# Supprimer un document de la collection
+query = {"nom": "John"}
+collection.delete_one(query)"""
+
+#fermeture de la connexion quand finit avec mongo db
+client.close()
+
+
 
 fichier = "chemin-vers-le-fichier"
 def chemins(fichier):
@@ -58,23 +84,14 @@ def add_transac(blockchain : poids):
     result = collection.insert_one(document)
     return document
 
-def edit_transac(blockchain : poids, blockchain_modif : poids_mod):
-    if poids_mod.btc is not None:
-        blockchain.btc = blockchain_modif.btc
-    if poids_mod.eth is not None:
-        blockchain.eth = blockchain_modif.eth
-    if poids_mod.ltc is not None:
-        blockchain.ltc = blockchain_modif.ltc
-    if poids_mod.xrp is not None:
-        blockchain.xrp = blockchain_modif.xrp
-    collection.update_one({"nom" : blockchain.name}, {"$set": {"btc": blockchain.btc,
-                                                               "eth": blockchain.eth,
-                                                               "ltc": blockchain.ltc,
-                                                               "xrp": blockchain.xrp}})
-    document = collection.find_one({"nom": blockchain.nom})
+def edit_transac(nom : str, blockchain_modif : poids):
+    collection.update_one({"nom" :nom}, {"$set": {"btc": blockchain_modif.btc,
+                                                               "eth": blockchain_modif.eth,
+                                                               "ltc": blockchain_modif.ltc,
+                                                               "xrp": blockchain_modif.xrp}})
+    document = collection.find_one({"nom": nom})
     return document
 
 
 def delete_transac(nom : str):
     collection.delete_one({"nom": nom})
-

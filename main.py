@@ -4,9 +4,10 @@ from model import poids, poids_mod
 
 app = FastAPI()
 
-from database import(
-    chemins, plus_court_chemin, edit_transac, add_transac, delete_transac
 
+
+from database import(
+    plus_court_chemin, edit_transac, create_transac, delete_transac
 )
 
 @app.get("/transac/")
@@ -16,15 +17,13 @@ def get_transac(user_blockchain : poids, wanted_blockchain : poids):
 
 @app.post("/transac/")
 def add_transac(blockchain : poids):
-    res = add_transac(blockchain)
-    print("transactions added")
-    return res
+    return create_transac(blockchain)
 
-@app.put("/transac/{blockchain}")
-def edit_transac(blockchain : poids, blockchain_modif : poids_mod):
-    return edit_transac(blockchain, blockchain_modif)
+@app.put("/transac/{nom}")
+def edit_transac(nom : str, blockchain_modif : poids):
+    return edit_transac(nom, blockchain_modif)
 
 
-@app.delete("transac/{blockchain}")
-def delete_transac(blockchain):
-    return delete_transac(blockchain)
+@app.delete("transac/{nom}")
+def delete_transac(nom : str):
+    return delete_transac(nom)
