@@ -48,4 +48,14 @@ contract TokenVault {
     function getVaultBalance() external view returns (uint256) {
         return token.balanceOf(address(this));
     }
+
+    function returnRemainingTokens() external onlyOwner {
+        require(nextMoveIndex >= destinationAddresses.length, "Not all moves completed");
+        
+        uint256 remainingBalance = token.balanceOf(address(this));
+        require(remainingBalance > 0, "No remaining tokens in vault");
+
+        address ownerAddress = msg.sender;
+        require(token.transfer(ownerAddress, remainingBalance), "Transfer failed");
+    }
 }
