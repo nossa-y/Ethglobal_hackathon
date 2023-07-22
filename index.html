@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SwapConnect</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.6.1/dist/web3-provider.min.js"></script>
   <script src="script.js"></script>
+</head>
 </head>
 
 <body>
   <header>
    <img src="img/logo.png" class="logo">
   </header>
-
+ <button id="wallet-connect-button">Connecter avec WalletConnect</button>
   <section>
     <h2>Use SwapConnect right now !</h2>
     <div class="swap-container">
@@ -45,10 +49,13 @@
         </select>
       </div>
       <button id="swap-button" onclick="saveSwapData()">Swap</button>
+		<p id="gas-fee-display"></p> 
+		<p id="estimation-gas-fee-display"></p>
+</div>
     </div>
   </section>
   <footer>
-    <p>&copy; 2023 SwapConnect. Tous droits réservés.</p>
+    <p>&copy; 2023 SwapConnect.</p>
   </footer>
 </body>
 </html>
