@@ -3,43 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Swap de Cryptomonnaie</title>
+  <title>SwapConnect</title>
   <link rel="stylesheet" href="styles.css">
   <script src="script.js"></script>
 </head>
+
 <body>
   <header>
-  
+   <img src="img/logo.png" class="logo">
   </header>
 
   <section>
     <h2>Use SwapConnect right now !</h2>
     <div class="swap-container">
-	 <div class="crypto-swap">
-      <input type="number" id="quantity-from" placeholder="Amount">
-      <select id="crypto-from">
-        <option value="btc">Bitcoin (BTC)</option>
-        <option value="eth">Ethereum (ETH)</option>
-        <option value="ltc">Litecoin (LTC)</option>
-        <option value="xrp">Ripple (XRP)</option>
-        <!-- Ajoutez d'autres cryptos -->
-      </select>
-	 </div>
-      <div class="swap-icon">&#8595;</div>
+		<!-- Ajoutez le bouton Paramètres -->
+      <button id="settings-button">Settings</button>
+      <!-- Ajoutez le panneau de réglages caché -->
+      <div id="settings-panel" style="display: none;"> 
+        <label for="setting1">Residue returns to Wallet :</label>
+        <input type="checkbox" id="setting1">
+      </div>
       <div class="crypto-swap">
-		<input type="number" id="quantity-to" placeholder="Amount" disabled>
-      <select id="crypto-to">
-        <option value="eth">Ethereum (ETH)</option>
-        <option value="btc">Bitcoin (BTC)</option>
-        <option value="ltc">Litecoin (LTC)</option>
-        <option value="xrp">Ripple (XRP)</option>
-        <!-- Ajoutez d'autres cryptos -->
-      </select>
+        <input type="number" id="quantity-from" placeholder="Amount">
+        <select id="crypto-from">
+          <option value="btc">Bitcoin (BTC)</option>
+          <option value="eth">Ethereum (ETH)</option>
+          <option value="ltc">Litecoin (LTC)</option>
+          <option value="xrp">Ripple (XRP)</option>
+          <!-- Ajoutez d'autres cryptos -->
+        </select>
+      </div>
+      <button class="swap-icon">&#8595;</button>
+      <div class="crypto-swap">
+        <input type="number" id="quantity-to" placeholder="Amount" disabled>
+        <select id="crypto-to">
+          <option value="eth">Ethereum (ETH)</option>
+          <option value="btc">Bitcoin (BTC)</option>
+          <option value="ltc">Litecoin (LTC)</option>
+          <option value="xrp">Ripple (XRP)</option>
+          <!-- Ajoutez d'autres cryptos -->
+        </select>
+      </div>
+      <button id="swap-button" onclick="saveSwapData()">Swap</button>
     </div>
-		<button id="swap-button">Swap</button>
-	 </div>
   </section>
-
   <footer>
     <p>&copy; 2023 SwapConnect. Tous droits réservés.</p>
   </footer>
