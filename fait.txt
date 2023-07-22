@@ -1,0 +1,17 @@
+fait
+
+interface utilisateur
+algorithme d'optimisation
+api
+
+à faire
+
+
+ajouter le bouton wallet, pour connecter le wallet
+base de donnée interactive qui est liée au front end
+lier notre projet à polycon
+lier notre projet a filecoin
+effectuer des tests
+faire un diapo de présentation
+effectuer une strategie marketing
+optimiser le front-end pour un format comme nouns le demande si on a du temps
