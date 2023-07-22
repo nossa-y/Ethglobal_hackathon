@@ -1,11 +1,28 @@
+/* Réinitialisation des marges et des paddings pour l'ensemble du document */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Appliquer une hauteur de 100vh pour que le contenu occupe toute la hauteur de la fenêtre */
+body, html {
+  height: 100vh;
+}
+
 /* Style spécifique pour la section du swap de cryptomonnaie */
 section {
-  text-align: center;
-  padding: 20px 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* Ajouter une marge en haut pour éloigner la section du logo */
 }
 
 h2 {
-  color: #333;
+  color: #fff;
+  margin-bottom: 20px;
 }
 
 .swap-container {
@@ -75,4 +92,31 @@ input[type="number"] {
 
 input[disabled] {
   background-color: #f2f2f2;
+}
+
+/* Dégradé sur l'arrière-plan de la page */
+body {
+  background: linear-gradient(#007bff, #000000);
+  margin: 0;
+  padding: 0;
+}
+
+/* Logo en haut à gauche */
+.logo {
+  width: 200px;
+  height: 100px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+/* Ajoutez cette règle CSS pour le bouton "Paramètres" */
+#settings-button {
+  top: 10px;
+  right: 10px;
+  margin-bottom: 15px;
+}
+
+#settings-panel {
+	margin-bottom: 10px;
 }
