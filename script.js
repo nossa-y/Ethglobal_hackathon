@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function (){
   });
 
   function displayGasFees() {
-    const apiKey = "A174SBG81UYCT7JK2CDJUFMU5CPB3V2512"; // Remplacez par votre clé d'API Etherscan
+    const apiKey = "A174SBG81UYCT7JK2CDJUFMU5CPB3V2512";
     const url = `https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${apiKey}`;
 
     fetch(url)
@@ -95,8 +95,10 @@ document.addEventListener('DOMContentLoaded', function (){
       .then(data => {
         if (data.status === "1" && data.message === "OK") {
           const proposedGasPrice = data.result.ProposeGasPrice;
+          const gasInWei = proposedGasPrice * 1888 * 151000 / 1000000000;
           gasFeeDisplay.textContent = `
             Gas Price: ${proposedGasPrice} Wei
+            and Max Estimated Gas Fee: ${gasInWei.toFixed(2)} $
           `;
         } else {
           gasFeeDisplay.textContent = "Erreur lors de la récupération des frais de gaz en Wei.";
@@ -107,10 +109,40 @@ document.addEventListener('DOMContentLoaded', function (){
       });
   }
 
+// Initialiser Web3.js avec WalletConnectProvider
+const provider = new WalletConnectProvider({
+  infuraId: 'b374158ffb53410c8f11515d15ca7aae',
+});
+
+let web3;
+if (provider.wc.connected) {
+  web3 = new Web3(provider);
+} else {
+  console.log('Veuillez connecter votre portefeuille via WalletConnect.');
+}
+
+// Attacher un gestionnaire d'événements au bouton "Connecter avec WalletConnect"
+const walletConnectButton = document.getElementById('wallet-connect-button');
+walletConnectButton.addEventListener('click', function() {
+    requestAccount();
+});
+
+// Fonction pour demander la permission à l'utilisateur pour accéder à son compte Ethereum via WalletConnect
+async function requestAccount() {
+  try {
+    await provider.enable();
+    web3 = new Web3(provider);
+    console.log('Compte Ethereum connecté avec succès via WalletConnect.');
+  } catch (error) {
+    console.error('Erreur lors de la connexion au compte Ethereum via WalletConnect :', error);
+    alert('Erreur lors de la connexion au compte Ethereum via WalletConnect.');
+  }
+}
+
   // Appeler la fonction calculateExchange pour initialiser la valeur de quantiteto
   calculateExchange();
 
- // Appeler la fonction displayGasFees pour afficher les frais de gaz actualisés
+  // Appeler la fonction displayGasFees pour afficher les frais de gaz actualisés
   displayGasFees();
 
   // Rafraîchir les frais de gaz toutes les 10 secondes (ou à la fréquence souhaitée)
