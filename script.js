@@ -11,6 +11,34 @@ document.addEventListener('DOMContentLoaded', function (){
   const settingsPanel = document.getElementById('settings-panel');
   const gasFeeDisplay = document.getElementById('gas-fee-display'); 
 
+  // Taux de conversion statiques (à remplacer par les taux en temps réel)
+  const conversionRates = {
+    btc: {
+      eth: 12.34,
+      ltc: 23.45,
+      xrp: 34.56,
+      btc: 1,
+    },
+    eth: {
+      btc: 0.081,
+      ltc: 2.4,
+      xrp: 3.5,
+      eth: 1,
+    },
+    ltc: {
+      btc: 0.043,
+      eth: 0.42,
+      xrp: 1.3,
+      ltc: 1,
+    },
+    xrp: {
+      btc: 0.027,
+      eth: 0.29,
+      ltc: 0.76,
+      xpr: 1,
+    },
+  };
+
   // Fonction de calcul de l'échange
   function calculateExchange() {
     const quantityFrom = parseFloat(quantityFromInput.value);
@@ -18,18 +46,13 @@ document.addEventListener('DOMContentLoaded', function (){
     const selectedCryptoTo = cryptoToSelect.value;
 
     if (!isNaN(quantityFrom)) {
-      const url = `https://api.coingecko.com/api/v3/simple/price?ids=${selectedCryptoFrom}&vs_currencies=${selectedCryptoTo}`;
-
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          const exchangeRate = data[selectedCryptoFrom][selectedCryptoTo];
-          const quantityTo = quantityFrom * exchangeRate;
-          quantityToInput.value = quantityTo.toFixed(2); // Affiche deux décimales
-        })
-        .catch(error => {
-          quantityToInput.value = 'Taux de conversion introuvable';
-        });
+      const exchangeRate = conversionRates[selectedCryptoFrom][selectedCryptoTo];
+      if (exchangeRate) {
+        const quantityTo = quantityFrom * exchangeRate;
+        quantityToInput.value = quantityTo.toFixed(2); // Affiche deux décimales
+      } else {
+        quantityToInput.value = 'Taux de conversion introuvable';
+      }
     } else {
       quantityToInput.value = '';
     }
@@ -87,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function (){
   // Appeler la fonction calculateExchange pour initialiser la valeur de quantiteto
   calculateExchange();
 
-  // Appeler la fonction displayGasFees pour afficher les frais de gaz actualisés
+ // Appeler la fonction displayGasFees pour afficher les frais de gaz actualisés
   displayGasFees();
 
   // Rafraîchir les frais de gaz toutes les 10 secondes (ou à la fréquence souhaitée)
