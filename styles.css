@@ -1,50 +1,76 @@
 /* Style spécifique pour la section du swap de cryptomonnaie */
 section {
-  background-color: #f2f2f2;
   text-align: center;
-  padding: 30px 0;
+  padding: 20px 0;
 }
 
 h2 {
   color: #333;
 }
 
-.crypto-swap {
+.swap-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+/* Style pour le rectangle autour de l'option "Swap" */
+.swap-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  padding: 5px;
+  width: 100%;
+  box-sizing: border-box; /* Inclure la bordure dans la largeur du rectangle */
+  margin-bottom: 10px; /* Ajouter une marge en bas pour séparer les éléments */
+  line-height: 2; /* Centrer verticalement le texte */
 }
 
 select {
   padding: 10px;
   font-size: 16px;
+  width: 100%;
+  text-align-last: center; /* Centre le texte horizontalement (pour Firefox) */
+  -moz-text-align-last: center; /* Centre le texte horizontalement (pour Firefox) */
+}
+
+/* Centrer verticalement le texte des options */
+select option {
+  line-height: 2;
 }
 
 .swap-icon {
   font-size: 24px;
-  margin: 0 20px;
+  margin: 10px 0;
 }
 
-swap-button {
-  padding: 10px 20px;
+#swap-button {
+  padding: 10px 15px;
   background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  margin-top: 20px; /* Ajout d'une marge en haut pour séparer le bouton */
+  font-size: 15px; /* Ajout de la taille de police souhaitée */
 }
 
-button:hover {
+#swap-button:hover {
   background-color: #0056b3;
 }
 
 input[type="number"] {
   padding: 10px;
   font-size: 16px;
-  width: 120px;
+  width: 100%;
   text-align: center;
-  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 input[disabled] {
