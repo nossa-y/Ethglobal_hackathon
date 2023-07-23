@@ -17,12 +17,12 @@ def get_transac(user_blockchain : poids, wanted_blockchain : poids):
 
 @app.post("/transac/")
 def add_transac(blockchain : poids):
-    return create_transac(blockchain)
+    res = create_transac(blockchain)
+    return {"message":"ajouté!"}
 
 @app.put("/transac/{nom}")
-def edit_transac(nom : str, blockchain_modif : poids):
+def update_transac(nom : str, blockchain_modif : poids):
     return edit_transac(nom, blockchain_modif)
-
 
 @app.delete("transac/{nom}")
 def delete_transac(nom : str):

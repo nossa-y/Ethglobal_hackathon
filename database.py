@@ -8,14 +8,14 @@ client = MongoClient("mongodb://localhost:27017")
 #client = pymongo.MongoClient("mongodb://localhost:27017/")
 database = client["blockchain"]
 collection = database["transaction"]
-
+"""
 #exemple(chat):
 # Inserer un document
 data = {"nom": "John", "âge": 30, "pays": "France"}
 inserted_doc = collection.insert_one(data)
 print("ID du document inséré", inserted_doc.inserted_id)
 
-"""# Trouver un document dans la collection
+# Trouver un document dans la collection
 query = {"nom": "John"}
 result = collection.find_one(query)
 print(result)
@@ -27,15 +27,16 @@ collection.update_one(query, new_data)
 
 # Supprimer un document de la collection
 query = {"nom": "John"}
-collection.delete_one(query)"""
+collection.delete_one(query)
 
 #fermeture de la connexion quand finit avec mongo db
-client.close()
+"""
+
 
 
 
 fichier = "chemin-vers-le-fichier"
-def chemins(fichier):
+def all_chemins(fichier):
     global chemins
     chemins = []
     p = 0
@@ -78,11 +79,27 @@ def plus_court_chemin(user_blockchain, wanted_blockchain): #blockchain de depaar
         q += 1
     soluce = best_chemins[q]
     return soluce
+#il faudrait mettre tous les chemins dasn la base de donnée, dans une autre que transac car pas la même forme
 
-def add_transac(blockchain : poids):
-    document = blockchain
-    result = collection.insert_one(document)
-    return document
+def obtenir_chemin(nom1: str, nom2: str):
+    result = collection.find_one({"nom": nom1})
+    if result and nom2 in result["chemin"]:
+        chemin = result["chemin"]
+        start_index = chemin.index(nom1)
+        end_index = chemin.index(nom2)
+        if start_index < end_index:
+            path = chemin[start_index:end_index + 1]
+            return path
+    return None
+
+
+def take_chemin(user_blockchain, wanted_blockchain):
+    return plus_court_chemin(user_blockchain, wanted_blockchain) #il faudrait que le chemin soit dans la base de donnée, qu'on prenne cet élément de la base de donnée avec find_one et qu'on le retourne
+
+def create_transac(blockchain : poids):
+    blockchain_dict = blockchain.dict()
+    result = collection.insert_one(blockchain_dict)
+    return {"message": "blockchain a été ajoutée"}
 
 def edit_transac(nom : str, blockchain_modif : poids):
     collection.update_one({"nom" :nom}, {"$set": {"btc": blockchain_modif.btc,
